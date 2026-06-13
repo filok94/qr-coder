@@ -46,11 +46,8 @@ const qrContainer = ref<HTMLDivElement | null>(null);
 const activePreset = ref("corporate");
 
 const PRESETS = [
-  { id: "corporate", label: "Корпоративный" },
-  { id: "minimal", label: "Минимализм" },
+  { id: "corporate", label: "Основной" },
   { id: "gradient", label: "Градиент" },
-  { id: "neon", label: "Неон" },
-  { id: "dots", label: "Точки" },
 ] as const;
 
 let currentQr: QRCodeStyling | null = null;
@@ -79,14 +76,6 @@ function getOptions(presetId: string) {
         cornersDotOptions: { type: "dot" as const, color: "#0f172a" },
         backgroundOptions: { color: "#f8fafc" },
       };
-    case "minimal":
-      return {
-        ...base,
-        dotsOptions: { type: "dots" as const, color: "#000000" },
-        cornersSquareOptions: { type: "square" as const, color: "#000000" },
-        cornersDotOptions: { type: "dot" as const, color: "#000000" },
-        backgroundOptions: { color: "#ffffff" },
-      };
     case "gradient":
       return {
         ...base,
@@ -103,22 +92,6 @@ function getOptions(presetId: string) {
           gradient: { type: "linear" as const, rotation: 0, colorStops: [{ offset: 0, color: "#6366f1" }, { offset: 1, color: "#ec4899" }] },
         },
         backgroundOptions: { color: "#ffffff" },
-      };
-    case "neon":
-      return {
-        ...base,
-        dotsOptions: { type: "rounded" as const, color: "#22d3ee" },
-        cornersSquareOptions: { type: "extra-rounded" as const, color: "#22d3ee" },
-        cornersDotOptions: { type: "dot" as const, color: "#22d3ee" },
-        backgroundOptions: { color: "#0f172a" },
-      };
-    case "dots":
-      return {
-        ...base,
-        dotsOptions: { type: "dots" as const, color: "#16a34a" },
-        cornersSquareOptions: { type: "dot" as const, color: "#16a34a" },
-        cornersDotOptions: { type: "dot" as const, color: "#16a34a" },
-        backgroundOptions: { color: "#f0fdf4" },
       };
     default:
       return base;
